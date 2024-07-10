@@ -35,7 +35,7 @@ static const struct fb_fix_screeninfo simplefb_fix = {
 static const struct fb_fix_screeninfo simplefb_fix_mono = {
 	.id		= "simple",
 	.type		= FB_TYPE_PACKED_PIXELS,
-	.visual		= FB_VISUAL_MONO01,
+	.visual		= FB_VISUAL_MONO10,
 	.accel		= FB_ACCEL_NONE,
 };
 
