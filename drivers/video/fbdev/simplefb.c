@@ -32,6 +32,13 @@ static const struct fb_fix_screeninfo simplefb_fix = {
 	.accel		= FB_ACCEL_NONE,
 };
 
+static const struct fb_fix_screeninfo simplefb_fix_mono = {
+	.id		= "simple",
+	.type		= FB_TYPE_PACKED_PIXELS,
+	.visual		= FB_VISUAL_MONO01,
+	.accel		= FB_ACCEL_NONE,
+};
+
 static const struct fb_var_screeninfo simplefb_var = {
 	.height		= -1,
 	.width		= -1,
@@ -456,7 +463,11 @@ static int simplefb_probe(struct platform_device *pdev)
 
 	par = info->par;
 
-	info->fix = simplefb_fix;
+	if (params.format->bits_per_pixel == 1)
+		info->fix = simplefb_fix_mono;
+	else
+		info->fix = simplefb_fix;
+
 	info->fix.smem_start = mem->start;
 	info->fix.smem_len = resource_size(mem);
 	info->fix.line_length = params.stride;
